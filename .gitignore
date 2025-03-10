@@ -118,4 +118,5 @@ cython_debug/
 
 # macOS DS_Store files
 ~$*.pptx
+*/.idea
 .DS_Store
