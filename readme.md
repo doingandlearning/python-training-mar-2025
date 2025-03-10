@@ -16,7 +16,7 @@ As a live course, we can go deeper on topics that are of interest, whether or no
 - 10.30-11.00 - Break
 - 11.00-12.30 - Session 2
 - 12.30-13.30 - Lunch
-- 13.30-15.00 - Session 3
+- 13.30-15.15 - Session 3
 
 ## Outline
 
