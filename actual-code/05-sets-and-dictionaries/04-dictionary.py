@@ -42,6 +42,9 @@ cities_dictionary["Netherlands"] = "Amsterdam"
 cities_dictionary["Ukraine"] = "Kiev"
 print(cities_dictionary)
 
-france = cities_dictionary.fromkeys(["France", "Italy"])
+france = cities_dictionary.fromkeys([
+    "France",
+    "Italy"
+])
 print(france)
 
