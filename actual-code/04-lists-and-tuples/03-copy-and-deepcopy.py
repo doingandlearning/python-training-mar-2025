@@ -15,3 +15,4 @@ list_of_lists_copy[1].append(5)
 list_of_lists.append(6)
 print(list_of_lists)
 print(list_of_lists_copy)
+
