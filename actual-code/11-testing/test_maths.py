@@ -25,6 +25,9 @@ def test_adding_two_numbers_produces_a_correct_result(number1, number2, expected
     # Assert  - Then something will be true
     assert expected_result == actual_result
 
+# Test Driven Development
+# -> Red - Green - Refactor
+
 #
 # def test_adding_two_floats_is_correct():
 #     result = add(1.2, 3.4)
