@@ -1,4 +1,4 @@
-### **Introduction to NumPy and Matplotlib for Data Analysis and Visualization**
+# **Introduction to NumPy and Matplotlib for Data Analysis and Visualization**
 
 ---
 
@@ -21,7 +21,7 @@ By the end of this workshop, participants will be able to:
 - Performance comparison: Python lists vs. NumPy arrays  
 
 
-## **Why Use NumPy Instead of Python Lists?**
+#### **Why Use NumPy Instead of Python Lists?**
 Python lists are **flexible** and **built-in**, but they are **slow** and **inefficient for numerical computations**. NumPy provides:
 ✅ **Speed**: Operations on NumPy arrays are **much faster** than Python lists.  
 ✅ **Memory Efficiency**: NumPy uses **fixed-type** arrays, while Python lists store mixed data types.  
@@ -30,10 +30,10 @@ Python lists are **flexible** and **built-in**, but they are **slow** and **inef
 
 ---
 
-## **1️⃣ Creating Arrays in NumPy**
+### **1️⃣ Creating Arrays in NumPy**
 In NumPy, we create arrays using **`np.array()`**, **`np.arange()`**, and **`np.linspace()`**.
 
-### **📌 Example 1: `np.array()` (Creating from a List)**
+#### **📌 Example 1: `np.array()` (Creating from a List)**
 ```python
 import numpy as np
 
@@ -46,7 +46,7 @@ print(arr)
 
 ---
 
-### **📌 Example 2: `np.arange()` (Creating Sequences)**
+#### **📌 Example 2: `np.arange()` (Creating Sequences)**
 ```python
 arr = np.arange(0, 10, 2)  # Start at 0, go up to 10 (exclusive), step by 2
 print(arr)
@@ -58,7 +58,7 @@ print(arr)
 
 ---
 
-### **📌 Example 3: `np.linspace()` (Creating Evenly Spaced Values)**
+#### **📌 Example 3: `np.linspace()` (Creating Evenly Spaced Values)**
 ```python
 arr = np.linspace(0, 10, 5)  # Start at 0, end at 10, create 5 equally spaced numbers
 print(arr)
@@ -69,10 +69,10 @@ print(arr)
 
 ---
 
-## **2️⃣ Reshaping and Slicing Arrays**
+### **2️⃣ Reshaping and Slicing Arrays**
 NumPy allows **reshaping** and **slicing** of arrays efficiently.
 
-### **📌 Example 4: Reshaping Arrays**
+#### **📌 Example 4: Reshaping Arrays**
 ```python
 arr = np.arange(1, 10)  # Creates an array [1, 2, 3, ..., 9]
 reshaped = arr.reshape(3, 3)  # Converts to 3x3 matrix
@@ -91,7 +91,7 @@ print(reshaped)
 
 ---
 
-### **📌 Example 5: Slicing NumPy Arrays**
+#### **📌 Example 5: Slicing NumPy Arrays**
 ```python
 arr = np.array([10, 20, 30, 40, 50])
 
@@ -110,10 +110,10 @@ print(arr[-2:])  # Last two elements
 
 ---
 
-## **3️⃣ Performance Comparison: Python Lists vs. NumPy Arrays**
+### **3️⃣ Performance Comparison: Python Lists vs. NumPy Arrays**
 NumPy is **significantly faster** than Python lists for numerical operations.
 
-### **📌 Example 6: Summing a Large List vs. NumPy Array**
+#### **📌 Example 6: Summing a Large List vs. NumPy Array**
 ```python
 import time
 
@@ -142,12 +142,12 @@ NumPy sum time: 0.002 sec
 
 ---
 
-### **📌 Example 7: Element-Wise Operations in NumPy**  
+#### **📌 Example 7: Element-Wise Operations in NumPy**  
 One of the **biggest advantages of NumPy** over Python lists is that it supports **element-wise operations** without requiring loops.
 
 ---
 
-### **1️⃣ Basic Element-Wise Operations**
+#### **Basic Element-Wise Operations**
 ```python
 import numpy as np
 
@@ -178,7 +178,7 @@ print(arr1 ** 2)
 
 ---
 
-### **2️⃣ Broadcasting: Operations with Scalars**
+#### **Broadcasting: Operations with Scalars**
 You can also perform operations **between an array and a single number** (scalar), and NumPy **broadcasts** the operation to all elements.
 
 ```python
@@ -200,7 +200,7 @@ print(arr / 2)  # Divides every element by 2
 
 ---
 
-### **3️⃣ Comparison: NumPy vs. Python Lists**
+### **Comparison: NumPy vs. Python Lists**
 Let’s compare **element-wise operations** in **Python lists vs. NumPy arrays**.
 
 #### **📌 Example 8: Squaring Each Element in a List vs. NumPy**
@@ -236,7 +236,7 @@ print(squared_arr)
 
 ---
 
-## **🚀 Summary: Why Use NumPy Over Python Lists?**
+### **🚀 Summary: Why Use NumPy Over Python Lists?**
 | Feature | Python List | NumPy Array |
 |---------|------------|------------|
 | **Speed** | ❌ Slow (loops in Python) | ✅ Fast (vectorized C code) |
@@ -248,8 +248,7 @@ print(squared_arr)
 
 ---
 
-### **2️⃣ Loading and Processing Large Datasets with NumPy**
-# **📌 Working with Data Files in NumPy**
+## **📌 Working with Data Files in NumPy**
 NumPy provides efficient ways to **read, write, and process data from files**, especially for large datasets. This guide covers:
 
 ✅ **Reading structured data** using `np.loadtxt()` and `np.genfromtxt()`  
@@ -258,7 +257,7 @@ NumPy provides efficient ways to **read, write, and process data from files**, e
 
 ---
 
-## **1️⃣ Reading Data from Files**
+### **1️⃣ Reading Data from Files**
 When working with large numerical datasets, plain text files (`.csv`, `.txt`) are common. NumPy provides:
 - **`np.loadtxt()`**: Simple and fast for structured data.
 - **`np.genfromtxt()`**: More flexible, handles missing values.
@@ -266,7 +265,7 @@ When working with large numerical datasets, plain text files (`.csv`, `.txt`) ar
 
 ---
 
-### **📌 Example 1: Reading a CSV File with `np.loadtxt()`**
+#### **📌 Example 1: Reading a CSV File with `np.loadtxt()`**
 Use `np.loadtxt()` to read structured numerical data **without missing values**.
 
 #### **🔹 Sample File (`data.csv`):**
@@ -293,10 +292,10 @@ print(data)
 
 ---
 
-### **📌 Example 2: Handling Missing Values with `np.genfromtxt()`**
+#### **📌 Example 2: Handling Missing Values with `np.genfromtxt()`**
 If your dataset **contains missing values**, `np.loadtxt()` **will fail**. Instead, use `np.genfromtxt()`.
 
-#### **🔹 Sample File (`data_with_missing.csv`):**
+##### **🔹 Sample File (`data_with_missing.csv`):**
 ```
 10.5, 20.3, 30.1
 15.2, , 35.6  # Missing value in the second column
@@ -313,7 +312,7 @@ print(data)
 
 ---
 
-### **📌 Example 3: Saving a NumPy Array to a File with `np.savetxt()`**
+#### **📌 Example 3: Saving a NumPy Array to a File with `np.savetxt()`**
 You can **export NumPy arrays** to text files using `np.savetxt()`.
 
 ```python
@@ -330,7 +329,7 @@ print("Data saved to output.csv")
 
 ---
 
-## **2️⃣ Handling Missing Data in NumPy**
+### **2️⃣ Handling Missing Data in NumPy**
 NumPy represents missing values using `np.nan` (Not-a-Number).
 
 ### **📌 Example 4: Detecting and Replacing Missing Values**
@@ -355,7 +354,7 @@ print(data)
 
 ---
 
-## **3️⃣ Boolean Masking and Filtering**
+### **3️⃣ Boolean Masking and Filtering**
 Boolean masking is a **powerful way to filter** data based on conditions.
 
 ### **📌 Example 5: Filtering Values Based on Conditions**
@@ -381,7 +380,7 @@ print(filtered_data)
 
 ---
 
-### **📌 Example 6: Combining Multiple Conditions**
+#### **📌 Example 6: Combining Multiple Conditions**
 ```python
 data = np.array([10, 15, 20, 25, 30])
 
@@ -396,7 +395,7 @@ print(filtered_data)
 
 ---
 
-## **🚀 Summary**
+### **🚀 Summary**
 | **Feature** | **Method** | **Key Benefit** |
 |------------|------------|----------------|
 | **Read Data** | `np.loadtxt()` | Fast, structured numerical data |
@@ -409,8 +408,7 @@ print(filtered_data)
 
 ---
 
-### **3️⃣ Data Visualization with Matplotlib**
-# **📌 Data Visualization with Matplotlib**
+## **📌 Data Visualization with Matplotlib**
 Matplotlib is **the most widely used** Python library for plotting and visualizing data. This section covers:
 
 ✅ **Basic plotting types:** `plot()`, `scatter()`, `hist()`  
@@ -419,12 +417,12 @@ Matplotlib is **the most widely used** Python library for plotting and visualizi
 
 ---
 
-## **1️⃣ Basic Plotting in Matplotlib**
+### **1️⃣ Basic Plotting in Matplotlib**
 Matplotlib provides several types of plots. Let's start with **line plots, scatter plots, and histograms**.
 
 ---
 
-### **📌 Example 1: Line Plot (`plt.plot()`)**
+#### **📌 Example 1: Line Plot (`plt.plot()`)**
 A **line plot** is used to visualize continuous data.
 
 ```python
@@ -458,7 +456,7 @@ plt.show()
 
 ---
 
-### **📌 Example 2: Scatter Plot (`plt.scatter()`)**
+#### **📌 Example 2: Scatter Plot (`plt.scatter()`)**
 A **scatter plot** is useful for visualizing relationships between two variables.
 
 ```python
@@ -488,7 +486,7 @@ plt.show()
 
 ---
 
-### **📌 Example 3: Histogram (`plt.hist()`)**
+#### **📌 Example 3: Histogram (`plt.hist()`)**
 A **histogram** shows the distribution of data.
 
 ```python
@@ -514,7 +512,7 @@ plt.show()
 
 ---
 
-## **2️⃣ Customizing Plots**
+### **2️⃣ Customizing Plots**
 A good plot **is clear, readable, and informative**. Matplotlib allows:
 - **Adding titles and labels**
 - **Customizing colors, markers, and line styles**
@@ -522,7 +520,7 @@ A good plot **is clear, readable, and informative**. Matplotlib allows:
 
 ---
 
-### **📌 Example 4: Customizing a Line Plot**
+#### **📌 Example 4: Customizing a Line Plot**
 ```python
 x = np.linspace(0, 10, 100)
 y1 = np.sin(x)
@@ -549,7 +547,7 @@ plt.show()
 
 ---
 
-### **📌 Example 5: Multiple Subplots (`plt.subplot()`)**
+#### **📌 Example 5: Multiple Subplots (`plt.subplot()`)**
 Sometimes, we need **multiple plots in one figure**.
 
 ```python
@@ -583,7 +581,7 @@ plt.show()
 
 ---
 
-## **3️⃣ Saving Plots for Reports**
+### **3️⃣ Saving Plots for Reports**
 Use `plt.savefig()` to **export plots as images** for reports and presentations.
 
 ```python
@@ -607,7 +605,7 @@ plt.show()
 
 ---
 
-## **🚀 Summary**
+### **🚀 Summary**
 | **Feature** | **Method** | **Best For** |
 |------------|------------|--------------|
 | **Line Plot** | `plt.plot()` | Time series, trends |
@@ -620,16 +618,16 @@ plt.show()
 
 ---
 
-### **5️⃣ Advanced Visualization: Heatmaps and 3D Plots**
+## **Advanced Visualization: Heatmaps and 3D Plots**
 
 For **scientific and engineering applications**, **heatmaps** and **3D surface plots** help **visualize multi-dimensional data**.
 
 ---
 
-## **1️⃣ Creating Heatmaps with `imshow()`**
+### **1️⃣ Creating Heatmaps with `imshow()`**
 A **heatmap** is a **color-coded matrix** used to visualize the **intensity of values** in a 2D dataset.
 
-### **📌 Example 1: Generating a Basic Heatmap**
+#### **📌 Example 1: Generating a Basic Heatmap**
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -657,7 +655,7 @@ plt.show()
 
 ---
 
-### **📌 Example 2: Heatmap with Custom Labels and Grid**
+#### **📌 Example 2: Heatmap with Custom Labels and Grid**
 ```python
 # Generate random 6x6 data
 data = np.random.rand(6, 6)
@@ -688,12 +686,12 @@ plt.show()
 
 ---
 
-## **2️⃣ Creating 3D Surface Plots**
+### **2️⃣ Creating 3D Surface Plots**
 A **3D surface plot** helps visualize relationships between **three continuous variables**.
 
 ---
 
-### **📌 Example 3: Basic 3D Surface Plot**
+#### **📌 Example 3: Basic 3D Surface Plot**
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -729,7 +727,7 @@ plt.show()
 
 ---
 
-### **📌 Example 4: Customizing a 3D Surface Plot**
+#### **📌 Example 4: Customizing a 3D Surface Plot**
 ```python
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111, projection="3d")
@@ -759,7 +757,7 @@ plt.show()
 
 ---
 
-## **🚀 Summary: When to Use Heatmaps vs. 3D Plots**
+### **🚀 Summary: When to Use Heatmaps vs. 3D Plots**
 | **Visualization** | **Best Use Cases** | **Matplotlib Function** |
 |------------------|------------------|------------------|
 | **Heatmap (`imshow`)** | Matrices, correlation data, intensity maps | `plt.imshow()` |
@@ -772,7 +770,3 @@ plt.show()
 - **NumPy Documentation**: [https://numpy.org/doc/stable/](https://numpy.org/doc/stable/)  
 - **Matplotlib Documentation**: [https://matplotlib.org/stable/](https://matplotlib.org/stable/)  
 - **SciPy and Pandas for Next Steps**  
-
----
-
-Would you like a **dataset recommendation** for the CERN team, or should we use **randomly generated data** for examples? 🚀
