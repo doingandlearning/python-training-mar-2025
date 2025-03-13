@@ -120,3 +120,4 @@ cython_debug/
 ~$*.pptx
 */.idea
 .DS_Store
+z-temp/

@@ -1,7 +1,7 @@
 # file = open("logfile.txt", "a")  # w -> write, a -> append
 
 # Pythonic way to interact with files ... handles closing automatically!
-with open("logfile.txt", "a") as file:
+with open("logfile.txt", "a", newline="") as file:
     file.write("Gutentag\n")
     file.write("How are you?\n")
     file.write("Danke.\n")
