@@ -1,0 +1,4 @@
+experiment_id,measurement,unit,timestamp
+EXP001,12.5,mg/L,2025-03-10 14:30:00
+EXP002,7.8,ppm,2025-03-11 10:15:00
+EXP003,22.1,mm,2025-03-11 15:30:00
