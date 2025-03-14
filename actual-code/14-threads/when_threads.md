@@ -12,7 +12,7 @@ Threads are beneficial **when tasks involve a lot of waiting** (I/O-bound operat
 ✅ **Live monitoring systems**  
 
 🔹 **Why Threads Work Well Here**  
-In your example, **multiple sensors are collecting data concurrently**, and another thread is **processing the results** in real time. A standard for loop **would block each sensor from starting** until the previous one finished, leading to unnecessary delays.
+In my example, **multiple sensors are collecting data concurrently**, and another thread is **processing the results** in real time. A standard for loop **would block each sensor from starting** until the previous one finished, leading to unnecessary delays.
 
 ---
 
