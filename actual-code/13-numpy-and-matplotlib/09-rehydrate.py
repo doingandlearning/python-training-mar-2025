@@ -12,4 +12,4 @@ print(loaded_fig)
 
 # This is what I had to do to show the figure again.
 plt.figure(loaded_fig.number)
-plt.show() 
+plt.show()
