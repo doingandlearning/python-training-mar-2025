@@ -8,7 +8,9 @@ results_dict = {}
 # { "sensor_name": {"timestamp": "reading", , , } }
 
 
-def task(sensor_name):
+def task(sensor_name, thread):
+    # if thread:
+    #     thread.join()
     counter = 10
     while counter > 0:
         print(sensor_name)
@@ -20,10 +22,10 @@ def task(sensor_name):
         counter -= 1
 
 
-thread = Thread(target=task, args=["sensor1"])
-thread2 = Thread(target=task, args=["sensor2"])
-thread3 = Thread(target=task, args=["sensor3"])
-thread4 = Thread(target=task, args=["sensor4"])
+thread = Thread(target=task, args=["sensor1", None])
+thread2 = Thread(target=task, args=["sensor2", thread])
+thread3 = Thread(target=task, args=["sensor3", thread2])
+thread4 = Thread(target=task, args=["sensor4", thread3])
 
 def summarize_readings():
     counter = 10
