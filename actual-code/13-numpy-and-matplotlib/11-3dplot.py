@@ -24,5 +24,14 @@ def update(angle):
 ani = animation.FuncAnimation(fig, update, frames=np.arange(0, 360, 2), interval=50)
 
 # ax.view_init(elev=30, azim=60) # Elevation/Azimuth -> change the POV of the camera
-plt.show()
+# plt.show()
 
+import math
+np.printoptions(precision=1000)
+print(math.pi)
+print(np.pi)
+
+from mpmath import mp
+
+mp.dps = 1000
+print(mp.pi)
