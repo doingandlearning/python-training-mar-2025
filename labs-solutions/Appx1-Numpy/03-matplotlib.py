@@ -1,202 +1,179 @@
-# NumPy Data Handling Lab - SOLUTION
-# In this lab, you'll practice working with data files, handling missing values, and filtering data in NumPy
-
 import numpy as np
-import os
 import matplotlib.pyplot as plt
 
 # -------------------------------------------------
-# Part 1: Creating Sample Data Files
+# Part 1: Basic Plotting with Matplotlib
 # -------------------------------------------------
 
-# Let's first create some sample data files to work with
-def create_sample_files():
-    # Complete dataset (no missing values)
-    complete_data = np.array([
-        [10.5, 20.3, 30.1, 40.5],
-        [15.2, 25.4, 35.6, 45.7],
-        [12.8, 22.9, 32.7, 42.3],
-        [18.1, 28.6, 38.9, 48.2],
-        [14.7, 24.5, 34.8, 44.6]
-    ])
-    
-    # Dataset with missing values
-    missing_data = np.copy(complete_data)
-    missing_data[1, 2] = np.nan  # Row 1, Col 2
-    missing_data[3, 1] = np.nan  # Row 3, Col 1
-    missing_data[4, 3] = np.nan  # Row 4, Col 3
-    
-    # Save the data to CSV files
-    np.savetxt("complete_data.csv", complete_data, delimiter=",", fmt="%.1f")
-    np.savetxt("missing_data.csv", missing_data, delimiter=",", fmt="%.1f")
-    
-    print("Sample data files created: complete_data.csv and missing_data.csv")
+# EXERCISE 1: Create a simple line plot of a sine wave
+x = np.linspace(0, 2 * np.pi, 100)  # Generate x values
+y = np.sin(x)  # Compute sine values
 
-# Create the sample files if they don't exist
-if not os.path.exists("complete_data.csv"):
-    create_sample_files()
-
-# -------------------------------------------------
-# Part 2: Reading Data Files
-# -------------------------------------------------
-
-# EXERCISE 1: Read the complete data file using np.loadtxt()
-complete_data = np.loadtxt("complete_data.csv", delimiter=",")
-print("Complete data loaded successfully:")
-print(complete_data)
-
-# EXERCISE 2: Try to read the file with missing values using np.loadtxt()
-# What happens? Comment on the error
-try:
-    problematic_data = np.loadtxt("missing_data.csv", delimiter=",")
-    print("Data loaded successfully (unexpected!)")
-except ValueError as e:
-    print("Error loading data with np.loadtxt():")
-    print(e)
-    print("np.loadtxt() cannot handle missing values - it will raise an error when it encounters NaN values.")
-
-# EXERCISE 3: Now read the file with missing values using np.genfromtxt()
-missing_data = np.genfromtxt("missing_data.csv", delimiter=",")
-print("\nMissing data loaded with genfromtxt:")
-print(missing_data)
-
-# -------------------------------------------------
-# Part 3: Working with Missing Values
-# -------------------------------------------------
-
-# EXERCISE 4: Detect which values in the data are missing
-missing_mask = np.isnan(missing_data)
-print("\nMissing value mask (True indicates missing):")
-print(missing_mask)
-print(f"Number of missing values: {np.sum(missing_mask)}")
-
-# EXERCISE 5: Calculate the mean of each column, ignoring missing values
-column_means = np.nanmean(missing_data, axis=0)
-print("\nColumn means (ignoring NaN values):")
-print(column_means)
-
-# EXERCISE 6: Replace missing values with the mean of their respective columns
-# Create a copy to work with
-filled_data = np.copy(missing_data)
-
-# Replace NaN values with column means
-for col in range(missing_data.shape[1]):
-    col_mean = np.nanmean(missing_data[:, col])
-    # Create a mask for NaN values in this column
-    mask = np.isnan(filled_data[:, col])
-    # Replace NaN with the column mean
-    filled_data[mask, col] = col_mean
-
-print("\nData with missing values filled by column means:")
-print(filled_data)
-
-# -------------------------------------------------
-# Part 4: Boolean Masking and Filtering
-# -------------------------------------------------
-
-# Let's use the data we read from the complete file
-data = np.loadtxt("complete_data.csv", delimiter=",")
-
-# EXERCISE 7: Find all values in the data that are greater than 30
-high_values_mask = data > 30
-high_values = data[high_values_mask]
-print("\nValues greater than 30:")
-print(high_values)
-
-# EXERCISE 8: Find the positions (indices) where values are between 20 and 40
-between_mask = (data >= 20) & (data <= 40)
-positions = np.where(between_mask)
-values_between = data[between_mask]
-
-print("\nPositions (row, col) where values are between 20 and 40:")
-print(list(zip(positions[0], positions[1])))
-print("The values at these positions:")
-print(values_between)
-
-# EXERCISE 9: Create a filter to select rows where the sum of the row is greater than 100
-row_sums = np.sum(data, axis=1)
-high_sum_rows_mask = row_sums > 100
-high_sum_rows = data[high_sum_rows_mask]
-
-print("\nRows where sum exceeds 100:")
-print(high_sum_rows)
-print("Their sums:")
-print(np.sum(high_sum_rows, axis=1))
-
-# -------------------------------------------------
-# Part 5: Practical Application
-# -------------------------------------------------
-
-# EXERCISE 10: Temperature Analysis
-# The dataset represents temperature readings (in Celsius) for 5 days across 4 different locations
-# Column 1: Location A, Column 2: Location B, Column 3: Location C, Column 4: Location D
-
-# 1. Calculate the average temperature for each location
-location_avgs = np.mean(data, axis=0)
-print("\nAverage temperature by location:")
-for i, avg in enumerate(['A', 'B', 'C', 'D']):
-    print(f"Location {avg}: {location_avgs[i]:.1f}°C")
-
-# 2. Find the day (row) with the highest average temperature across all locations
-day_avgs = np.mean(data, axis=1)
-hottest_day_idx = np.argmax(day_avgs)
-print(f"\nDay {hottest_day_idx + 1} had the highest average temperature: {day_avgs[hottest_day_idx]:.1f}°C")
-
-# 3. Identify locations (columns) where the temperature exceeded 35°C at least once
-hot_days_by_location = np.any(data > 35, axis=0)
-hot_locations = ['A', 'B', 'C', 'D']
-print("\nLocations where temperature exceeded 35°C at least once:")
-for i, is_hot in enumerate(hot_days_by_location):
-    if is_hot:
-        print(f"Location {hot_locations[i]}")
-
-# 4. Create a boolean mask for readings between 20°C and 30°C (moderate temperatures)
-moderate_temp_mask = (data >= 20) & (data <= 30)
-print("\nModerate temperature readings (20-30°C):")
-print(moderate_temp_mask)
-
-# 5. Save a new CSV file with only the moderate temperature readings
-#    (other values should be replaced with 0)
-moderate_temps = np.where(moderate_temp_mask, data, 0)
-np.savetxt("moderate_temps.csv", moderate_temps, delimiter=",", fmt="%.1f")
-print("\nModerate temperatures saved to moderate_temps.csv")
-print("Data where only moderate temperatures are preserved (others set to 0):")
-print(moderate_temps)
-
-# BONUS: Create a visualization of the temperature data
-plt.figure(figsize=(10, 6))
-locations = ['A', 'B', 'C', 'D']
-days = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5']
-
-# Create a line chart
-for i in range(4):  # For each location
-    plt.plot(range(5), data[:, i], marker='o', label=f'Location {locations[i]}')
-
-plt.xticks(range(5), days)
-plt.xlabel('Day')
-plt.ylabel('Temperature (°C)')
-plt.title('Temperature Readings by Location')
-plt.grid(True, linestyle='--', alpha=0.7)
+plt.figure(figsize=(8, 5))
+plt.plot(x, y, label="Sine Wave", color="blue", linestyle="-")
+plt.xlabel("X values (radians)")
+plt.ylabel("Sine of X")
+plt.title("Sine Wave Plot")
 plt.legend()
-plt.savefig('temperature_plot.png')
-plt.close()
+plt.grid(True)
+plt.show()
 
-print("\nVisualization saved as temperature_plot.png")
 
-# Another visualization: Heatmap
-plt.figure(figsize=(8, 6))
-plt.imshow(data, cmap='YlOrRd')
-plt.colorbar(label='Temperature (°C)')
-plt.xticks(range(4), locations)
-plt.yticks(range(5), days)
-plt.xlabel('Location')
-plt.ylabel('Day')
-plt.title('Temperature Heatmap')
-for i in range(5):
-    for j in range(4):
-        plt.text(j, i, f"{data[i, j]:.1f}", ha='center', va='center', 
-                 color='black' if data[i, j] < 35 else 'white')
-plt.savefig('temperature_heatmap.png')
-plt.close()
+# EXERCISE 2: Create a scatter plot
+x = np.random.uniform(0, 10, 50)  # Random x values between 0 and 10
+y = x**2 + np.random.normal(0, 5, 50)  # Quadratic relationship with noise
 
-print("Heatmap visualization saved as temperature_heatmap.png")
+plt.figure(figsize=(8, 5))
+plt.scatter(x, y, color="red", alpha=0.7, label="Data Points")
+plt.xlabel("X values")
+plt.ylabel("Y = X^2 + noise")
+plt.title("Scatter Plot of Quadratic Function")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# EXERCISE 3: Create a histogram
+data = np.random.normal(70, 15, 1000)  # Generate normally distributed data
+
+plt.figure(figsize=(8, 5))
+plt.hist(data, bins=20, color="green", alpha=0.7, edgecolor="black")
+plt.xlabel("Score")
+plt.ylabel("Frequency")
+plt.title("Histogram of Normally Distributed Scores")
+plt.grid(True)
+plt.show()
+
+# -------------------------------------------------
+# Part 2: Customizing Plots
+# -------------------------------------------------
+
+# EXERCISE 4: Compare sine and cosine with customizations
+x = np.linspace(0, 2 * np.pi, 100)
+y_sin = np.sin(x)
+y_cos = np.cos(x)
+
+plt.figure(figsize=(8, 5))
+plt.plot(x, y_sin, label="Sine Wave", color="blue", linestyle="--", marker="o")
+plt.plot(x, y_cos, label="Cosine Wave", color="red", linestyle="-.", marker="s")
+plt.xlabel("X values (radians)")
+plt.ylabel("Function Value")
+plt.title("Comparison of Sine and Cosine")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+
+# EXERCISE 5: Scatter plot with customized markers
+x1 = np.random.uniform(0, 10, 30)
+y1 = np.random.uniform(0, 10, 30)
+
+x2 = np.random.uniform(0, 10, 30)
+y2 = np.random.uniform(0, 10, 30)
+
+plt.figure(figsize=(8, 5))
+plt.scatter(x1, y1, color="red", marker="o", alpha=0.5, label="Group 1")
+plt.scatter(x2, y2, color="blue", marker="^", alpha=0.5, label="Group 2")
+plt.xlabel("X values")
+plt.ylabel("Y values")
+plt.title("Scatter Plot with Different Markers")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# -------------------------------------------------
+# Part 3: Multiple Subplots
+# -------------------------------------------------
+
+# EXERCISE 6: 2x2 grid of subplots
+fig, axs = plt.subplots(2, 2, figsize=(10, 8))
+
+# Sine wave (Top-left)
+axs[0, 0].plot(x, np.sin(x), color="blue")
+axs[0, 0].set_title("Sine Wave")
+
+# Scatter plot (Top-right)
+axs[0, 1].scatter(x, y_sin, color="red", alpha=0.6)
+axs[0, 1].set_title("Scatter Plot")
+
+# Cosine wave (Bottom-left)
+axs[1, 0].plot(x, np.cos(x), color="green")
+axs[1, 0].set_title("Cosine Wave")
+
+# Histogram (Bottom-right)
+axs[1, 1].hist(data, bins=20, color="purple", edgecolor="black")
+axs[1, 1].set_title("Histogram")
+
+plt.tight_layout()
+plt.show()
+
+# -------------------------------------------------
+# Part 4: Saving Plots
+# -------------------------------------------------
+
+# EXERCISE 7: Save a high-quality plot
+plt.figure(figsize=(8, 5))
+plt.plot(x, np.sin(x), label="Sine Wave", color="blue", linestyle="-")
+plt.xlabel("X values")
+plt.ylabel("Sine of X")
+plt.title("Sine Wave Plot for Saving")
+plt.legend()
+plt.grid(True)
+
+# Save the figure
+plt.savefig("sine_wave_plot.png", dpi=300, bbox_inches="tight")
+plt.show()
+
+# -------------------------------------------------
+# Part 5: Real-world Application
+# -------------------------------------------------
+
+# EXERCISE 8: Student Exam Scores Analysis
+np.random.seed(42)  # Ensure reproducibility
+midterm_scores = np.random.normal(70, 15, 100)
+final_scores = midterm_scores + np.random.normal(5, 10, 100)
+final_scores = np.clip(final_scores, 0, 100)  # Ensure scores stay in range
+
+# Scatter plot of midterm vs. final scores
+plt.figure(figsize=(8, 5))
+plt.scatter(midterm_scores, final_scores, color="blue", alpha=0.6, label="Student Scores")
+plt.plot([0, 100], [0, 100], linestyle="--", color="red", label="No Improvement Line")
+plt.xlabel("Midterm Score")
+plt.ylabel("Final Score")
+plt.title("Midterm vs. Final Scores")
+plt.legend()
+plt.grid(True)
+plt.show()
+
+# Histograms of midterm and final scores (2x1 subplot)
+fig, axs = plt.subplots(2, 1, figsize=(8, 10))
+
+axs[0].hist(midterm_scores, bins=20, color="green", alpha=0.7, edgecolor="black")
+axs[0].set_title("Histogram of Midterm Scores")
+
+axs[1].hist(final_scores, bins=20, color="purple", alpha=0.7, edgecolor="black")
+axs[1].set_title("Histogram of Final Scores")
+
+plt.tight_layout()
+plt.show()
+
+# Improvement Visualization
+improvement = final_scores - midterm_scores
+
+plt.figure(figsize=(8, 5))
+plt.hist(improvement, bins=15, color="orange", alpha=0.7, edgecolor="black")
+plt.xlabel("Score Improvement")
+plt.ylabel("Number of Students")
+plt.title("Distribution of Score Improvements")
+plt.grid(True)
+plt.show()
+
+# BONUS CHALLENGE: Custom Visualization
+plt.figure(figsize=(8, 5))
+plt.hexbin(midterm_scores, final_scores, gridsize=25, cmap="coolwarm")
+plt.colorbar(label="Density")
+plt.xlabel("Midterm Score")
+plt.ylabel("Final Score")
+plt.title("Hexbin Plot of Midterm vs. Final Scores")
+plt.grid(True)
+plt.show()
