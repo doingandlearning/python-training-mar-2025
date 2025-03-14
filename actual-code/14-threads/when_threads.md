@@ -185,5 +185,3 @@ for file in file_list:
 - **Threads are great for real-time data collection, parallel I/O, and monitoring.**
 - **Use a for loop when processing tasks sequentially is sufficient.**
 - **For CPU-intensive tasks (e.g., simulations, matrix operations), use `multiprocessing` instead of `threading`.**
-
-Would you like a **multiprocessing version** of one of these examples for heavy computation? 🚀
